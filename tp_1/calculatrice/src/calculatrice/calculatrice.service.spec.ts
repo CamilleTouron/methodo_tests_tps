@@ -20,4 +20,9 @@ describe('CalculatriceService', () => {
       const result = service.somme(2, 3);
       expect(result).toBe(5);
   });
+
+  it('should return the difference of two numbers', () => {
+      const result = service.soustraction(5, 3);
+      expect(result).toBe(2);
+  });
 });
