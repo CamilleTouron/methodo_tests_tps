@@ -6,6 +6,8 @@ enum InteractionType {
   SOMME = '1',
   SOUSTRACTION = '2',
   MULTIPLICATION = '3',
+  DIVISION = '4',
+  EXPONENTIEL = '5',
 }
 
 @Module({
@@ -23,6 +25,8 @@ export class CalculatriceModule {
     console.log(`${InteractionType.SOMME}: Addition`);
     console.log(`${InteractionType.SOUSTRACTION}: Subtraction`);
     console.log(`${InteractionType.MULTIPLICATION}: Multiplication`);
+    console.log(`${InteractionType.DIVISION}: Division`);
+    console.log(`${InteractionType.EXPONENTIEL}: Exponentiation`);
     console.log("Enter your choice:");
   }
 
@@ -49,6 +53,12 @@ export class CalculatriceModule {
       case InteractionType.MULTIPLICATION:
         this.handleMultiplication();
         break;
+      case InteractionType.DIVISION:
+        this.handleDivision();
+        break;
+      case InteractionType.EXPONENTIEL:
+        this.handleExponentiel();
+        break;
       default:
         console.log("Invalid option. Try again.");
         this.promptInteraction();
@@ -67,7 +77,7 @@ export class CalculatriceModule {
         const result = this.calculatriceService.somme(a, b);
         console.log(`Result: ${result}`);
 
-        this.promptInteraction(); // Continue the loop
+        this.promptInteraction();
       });
     });
   }
@@ -84,7 +94,7 @@ export class CalculatriceModule {
         const result = this.calculatriceService.soustraction(a, b);
         console.log(`Result: ${result}`);
 
-        this.promptInteraction(); // Continue the loop
+        this.promptInteraction();
       });
     });
   }
@@ -101,7 +111,45 @@ export class CalculatriceModule {
         const result = this.calculatriceService.multiplication(a, b);
         console.log(`Result: ${result}`);
 
-        this.promptInteraction(); // Continue the loop
+        this.promptInteraction();
+      });
+    });
+  }
+
+  private handleDivision() {
+    console.log("Enter dividend:");
+    process.stdin.once('data', (data1) => {
+      const a = parseFloat(data1.toString().trim());
+
+      console.log("Enter divisor:");
+      process.stdin.once('data', (data2) => {
+        const b = parseFloat(data2.toString().trim());
+
+        if (b === 0) {
+          console.log("Error: Division by zero is not allowed.");
+        } else {
+          const result = this.calculatriceService.division(a, b);
+          console.log(`Result: ${result}`);
+        }
+
+        this.promptInteraction();
+      });
+    });
+  }
+
+  private handleExponentiel() {
+    console.log("Enter base:");
+    process.stdin.once('data', (data1) => {
+      const base = parseFloat(data1.toString().trim());
+
+      console.log("Enter exponent:");
+      process.stdin.once('data', (data2) => {
+        const exponent = parseFloat(data2.toString().trim());
+
+        const result = this.calculatriceService.exponention(base, exponent);
+        console.log(`Result: ${result}`);
+
+        this.promptInteraction();
       });
     });
   }
