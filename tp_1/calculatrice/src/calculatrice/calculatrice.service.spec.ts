@@ -25,4 +25,9 @@ describe('CalculatriceService', () => {
       const result = service.soustraction(5, 3);
       expect(result).toBe(2);
   });
+
+  it('should return the product of two numbers', () => {
+      const result = service.multiplication(2, 3);
+      expect(result).toBe(6);
+  });
 });

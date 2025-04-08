@@ -5,6 +5,7 @@ enum InteractionType {
   EXIT = '0',
   SOMME = '1',
   SOUSTRACTION = '2',
+  MULTIPLICATION = '3',
 }
 
 @Module({
@@ -21,6 +22,7 @@ export class CalculatriceModule {
     console.log(`${InteractionType.EXIT}: Exit`);
     console.log(`${InteractionType.SOMME}: Addition`);
     console.log(`${InteractionType.SOUSTRACTION}: Subtraction`);
+    console.log(`${InteractionType.MULTIPLICATION}: Multiplication`);
     console.log("Enter your choice:");
   }
 
@@ -43,6 +45,9 @@ export class CalculatriceModule {
         break;
       case InteractionType.SOUSTRACTION:
         this.handleSoustraction();
+        break;
+      case InteractionType.MULTIPLICATION:
+        this.handleMultiplication();
         break;
       default:
         console.log("Invalid option. Try again.");
@@ -77,6 +82,23 @@ export class CalculatriceModule {
         const b = parseFloat(data2.toString().trim());
 
         const result = this.calculatriceService.soustraction(a, b);
+        console.log(`Result: ${result}`);
+
+        this.promptInteraction(); // Continue the loop
+      });
+    });
+  }
+
+  private handleMultiplication() {
+    console.log("Enter first number:");
+    process.stdin.once('data', (data1) => {
+      const a = parseFloat(data1.toString().trim());
+
+      console.log("Enter second number:");
+      process.stdin.once('data', (data2) => {
+        const b = parseFloat(data2.toString().trim());
+
+        const result = this.calculatriceService.multiplication(a, b);
         console.log(`Result: ${result}`);
 
         this.promptInteraction(); // Continue the loop

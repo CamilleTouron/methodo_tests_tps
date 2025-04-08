@@ -9,4 +9,8 @@ export class CalculatriceService {
     soustraction(a: number, b: number): number {
         return a - b;
     }
+
+    multiplication(a: number, b: number): number {
+        return a * b;
+    }
 }
